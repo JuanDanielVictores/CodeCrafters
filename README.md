@@ -1,7 +1,5 @@
 # 🎨 CodeCrafters - Proyecto Django
 
-![Portada](https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80)
-
 [![Python Version](https://img.shields.io/badge/python-3.12.3-blue?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3123/)
 [![Django Version](https://img.shields.io/badge/django-4.2-green?logo=django&logoColor=white)](https://www.djangoproject.com/)
 [![Tailwind CSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
