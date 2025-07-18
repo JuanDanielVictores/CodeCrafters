@@ -1,7 +1,7 @@
 # 🎨 CodeCrafters - Proyecto Django
 
 [![Python Version](https://img.shields.io/badge/python-3.12.3-blue?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3123/)
-[![Django Version](https://img.shields.io/badge/django-4.2-green?logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![Django Version](https://img.shields.io/badge/django-5.2.4-green?logo=django&logoColor=white)](https://www.djangoproject.com/)
 [![Tailwind CSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![SonarQube](https://img.shields.io/badge/SonarQube-Quality%20Gate-brightgreen?logo=sonarqube&logoColor=white)](https://www.sonarqube.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -31,7 +31,7 @@ El proyecto incorpora buenas prácticas como:
 - Uso de entornos virtuales con `django-environ` para gestión segura de variables de entorno.
 - Integración de análisis de calidad de código con **SonarQube**.
 - Automatización y estandarización de tareas con un **Makefile**.
-- Compatible con Python 3.12.3 y Django 4.2.
+- Compatible con Python 3.12.3 y Django 5.2.4
 
 ---
 
