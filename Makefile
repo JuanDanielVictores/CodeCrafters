@@ -29,3 +29,8 @@ diff-dev:
 diff-prod:
 	@echo "🔍 Comparando production.txt con production.tmp.txt..."
 	@diff -u $(REQ_DIR)/production.txt $(REQ_DIR)/production.tmp.txt || echo "✔️ No hay diferencias."
+
+update_database:
+	@echo "🔄 Actualizando la base de datos..."
+	python manage.py makemigrations; \
+	python manage.py migrate
