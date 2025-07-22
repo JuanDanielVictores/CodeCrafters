@@ -1,6 +1,7 @@
 REQ_DIR = requirements
 PROD = $(REQ_DIR)/production.txt
 DEV = $(REQ_DIR)/development.txt
+DOCKER_IMAGE = CodeCrafters/app
 
 # ✅ Install dependencies
 install-prod:
@@ -8,6 +9,12 @@ install-prod:
 
 install-dev:
 	pip install -r $(DEV)
+
+# ✅ Ejecutar tests con coverage
+test:
+	coverage run manage.py test
+	coverage report
+	coverage xml
 
 # 🔄 Update dependencies DEVELOPMENT.txt
 sync-dev:
@@ -34,3 +41,10 @@ update_database:
 	@echo "🔄 Actualizando la base de datos..."
 	python manage.py makemigrations; \
 	python manage.py migrate
+
+# ✅ Docker
+docker-build:
+	docker build -t $(DOCKER_IMAGE) .
+
+docker-run:
+	docker run -p 8000:8000 $(DOCKER_IMAGE)
