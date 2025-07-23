@@ -48,3 +48,15 @@ docker-build:
 
 docker-run:
 	docker run -p 8000:8000 $(DOCKER_IMAGE)
+
+up:
+	docker-compose up -d
+
+down:
+	docker-compose down
+
+logs:
+	docker-compose logs -f
+
+psql:
+	docker exec -it codecrafters_postgres psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
