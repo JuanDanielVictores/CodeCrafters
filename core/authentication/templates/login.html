@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
+{% block title %}Login{% endblock %}
+
 {% block content %}
-    <div class="container d-flex align-items-center justify-content-center vh-100">
-        <div class="card p-4 shadow" style="min-width: 350px;">
-            <h3 class="text-center mb-3">Iniciar sesión</h3>
-            {% include "components/login_form.html" %}
-        </div>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
+        <h3 class="text-center mb-4">Iniciar Sesión</h3>
+        {% include "components/social_buttons.html" %}
+        <hr>
+        {% include "components/login_form.html" %}
     </div>
+</div>
 {% endblock %}
