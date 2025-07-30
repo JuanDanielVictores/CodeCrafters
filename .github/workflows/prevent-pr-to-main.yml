@@ -1,0 +1,34 @@
+name: Prevent Pull Request to Main
+
+on:
+  pull_request:
+    types: [ opened, reopened, edited ]
+    branches:
+      - main
+
+jobs:
+  warn-against-main-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR target
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const targetBranch = context.payload.pull_request.base.ref;
+            const prNumber = context.payload.pull_request.number;
+            const repo = context.repo;
+
+            if (targetBranch === "main") {
+              await github.rest.issues.createComment({
+                ...repo,
+                issue_number: prNumber,
+                body: `🚫 Esta pull request apunta a \`main\`, lo cual no está permitido.\n\n🛠️ Por favor, cámbiala para que apunte a \`develop\`.\n\nGracias. 🙏`
+              });
+
+              // ❌ Si quieres cerrar la PR automáticamente, descomenta esto:
+              // await github.rest.pulls.update({
+              //   ...repo,
+              //   pull_number: prNumber,
+              //   state: 'closed'
+              // });
+            }
