@@ -1,32 +1,74 @@
-<form method="post" class="p-4 rounded shadow-sm bg-white border">
+<form method="post" class="p-4 rounded-3 bg-light border border-secondary-subtle">
   {% csrf_token %}
 
-  <h4 class="mb-4 text-center text-dark fw-semibold">Ingrese su usuario y contraseña</h4>
-
-  <div class="mb-3">
-    <label for="username" class="form-label text-secondary">Username</label>
-      <ion-icon name="person-outline"></ion-icon>
-      <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username" required>
+  <!-- Usuario -->
+  <div class="mb-4">
+    <label for="username" class="form-label text-secondary fw-semibold">Usuario</label>
+    <div class="input-group">
+      <span class="input-group-text bg-primary text-white">
+        <ion-icon name="person-outline" style="font-size: 1.2rem;"></ion-icon>
+      </span>
+      <input
+        type="text"
+        name="username"
+        class="form-control"
+        id="username"
+        placeholder="Ingresa tu usuario"
+        required
+        style="box-shadow: none;">
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label for="password" class="form-label text-secondary">Password</label>
-    <ion-icon name="lock-closed-outline"></ion-icon>
-    <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
+  <!-- Contraseña -->
+  <div class="mb-4">
+    <label for="password" class="form-label text-secondary fw-semibold">Contraseña</label>
+    <div class="input-group">
+      <span class="input-group-text bg-primary text-white">
+        <ion-icon name="lock-closed-outline" style="font-size: 1.2rem;"></ion-icon>
+      </span>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        id="password"
+        placeholder="Ingresa tu contraseña"
+        required
+        style="box-shadow: none;">
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
+  <!-- Recordar / Olvido -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="remember">
+      <input type="checkbox" class="form-check-input" id="remember" name="remember">
       <label class="form-check-label text-secondary" for="remember">Mantener sesión iniciada</label>
     </div>
-    <a href="#" class="text-decoration-none small text-primary">¿Olvidaste tu contraseña?</a>
+    <a href="#" class="text-decoration-none fw-semibold text-primary small">¿Olvidaste tu contraseña?</a>
   </div>
 
-  <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">INICIAR SESION</button>
+  <!-- Botón -->
+  <button type="submit" class="btn btn-primary w-100 py-2 fw-bold shadow-sm">
+    INICIAR SESIÓN
+  </button>
 
+  <!-- Registro -->
   <div class="mt-4 text-center">
     <span class="text-muted">¿No tienes una cuenta?</span>
-    <a href="#" class="text-decoration-none fw-medium text-primary">Registrate</a>
+    <a href="#" class="text-decoration-none fw-semibold text-primary ms-1">Regístrate</a>
   </div>
 </form>
+
+<style>
+  input.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #0d6efd;
+  }
+  .input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  input.form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+</style>
