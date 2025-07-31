@@ -1,0 +1,31 @@
+#explore my container
+docker exec -t -i mycontainer /bin/bash
+
+#Drop database in postgres
+docker-compose exec postgres psql -U postgres -c "DROP DATABASE IF EXISTS runfood;"
+
+#nginx see errors
+docker-compose exec django nginx -t
+
+#dockerFile
+docker build --tag=runfood .
+docker run -p 8086:8006 --env-file ./.env --name=runfood-monolith-dev --rm runfood
+
+
+#docker-compose
+docker-compose build
+docker-compose up
+#or
+docker-compose up --build
+
+
+#run show fast
+docker-compose build --no-cache django
+docker-compose run --service-ports --rm django bash
+
+
+#Ingresar a la terminal de un contenedor
+docker exec -u 0 -it IDCONTAINER /bin/bash
+apt-get update
+apt-get install vim
+apt-get install nano
