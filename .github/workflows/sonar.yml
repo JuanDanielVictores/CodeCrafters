@@ -23,8 +23,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements/development.txt
-          coverage run manage.py test
+          coverage run --source=core manage.py test
           coverage xml
+      
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
