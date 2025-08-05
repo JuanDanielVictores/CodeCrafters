@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install dependencies and run tests
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements/development.txt
@@ -30,3 +30,5 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: -Dsonar.python.coverage.reportPaths=coverage.xml
