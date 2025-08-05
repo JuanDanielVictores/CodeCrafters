@@ -1,16 +1,23 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/base_auth.html" %}
+{% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'authentication/css/login.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-body-tertiary">
-    <div class="card shadow p-5 rounded-4" style="max-width: 480px; width: 100%; min-height: 60vh;">
-        <h3 class="text-center mb-4 fw-bold text-primary">Iniciar Sesión</h3>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100 bg-body-tertiary">
+        <div class="card shadow p-5 rounded-4" style="max-width: 480px; width: 100%; min-height: 60vh;">
+            <h3 class="text-center mb-4 fw-bold text-primary">Iniciar Sesión</h3>
 
-        {% include "components/molecules/social_buttons.html" %}
-        <hr class="mb-4">
+            {% include "components/molecules/social_buttons.html" %}
+            <hr class="mb-4">
 
-        {% include "authentication/components/login_form.html" %}
+            {% include "authentication/components/login_form.html" %}
+        </div>
     </div>
-</div>
 {% endblock %}
