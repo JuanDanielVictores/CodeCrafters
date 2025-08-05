@@ -1,0 +1,14 @@
+input.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #0d6efd;
+}
+
+.input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+input.form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
