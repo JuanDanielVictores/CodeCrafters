@@ -11,6 +11,8 @@ files_to_cover = {
     "config/asgi.py": 4,
     "core/authentication/views/login.py": 5,
     "core/authentication/tests/test_home_view.py": 7,
+    "core/authentication/tests/test_dummy.py": 7,
+    "core/authentication/tests/__init__.py": 1,
     "core/authentication/urls.py": 3,
     "config/urls.py": 3,
     "core/authentication/models/user/user.py": 24,
