@@ -1,12 +1,12 @@
-<form method="post" class="p-4 rounded-3 bg-light border border-secondary-subtle">
+<form method="post" class="login-form bg-light border border-secondary-subtle rounded-3 p-4">
     {% csrf_token %}
 
     <div class="mb-4">
         <label for="username" class="form-label text-secondary fw-semibold">Usuario</label>
         <div class="input-group">
-          <span class="input-group-text bg-primary text-white">
-            <ion-icon name="person-outline" style="font-size: 1.2rem;"></ion-icon>
-          </span>
+            <span class="input-group-text icon-input">
+                <i class="fas fa-user"></i>
+            </span>
             <input
                     type="text"
                     name="username"
@@ -20,9 +20,9 @@
     <div class="mb-4">
         <label for="password" class="form-label text-secondary fw-semibold">Contraseña</label>
         <div class="input-group">
-          <span class="input-group-text bg-primary text-white">
-            <ion-icon name="lock-closed-outline" style="font-size: 1.2rem;"></ion-icon>
-          </span>
+            <span class="input-group-text icon-input">
+                <i class="fas fa-lock"></i>
+            </span>
             <input
                     type="password"
                     name="password"
@@ -34,10 +34,6 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="remember" name="remember">
-            <label class="form-check-label text-secondary" for="remember">Mantener sesión iniciada</label>
-        </div>
         <a href="#" class="text-decoration-none fw-semibold text-primary small">¿Olvidaste tu contraseña?</a>
     </div>
 
