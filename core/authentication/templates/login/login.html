@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block title %}
-    Login
+    {{ title }}
 {% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'authentication/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
                     {% include "components/molecules/social_buttons.html" %}
                     <hr class="mb-4">
 
-                    {% include "authentication/components/login_form.html" %}
+                    {% include "login/components/login_form.html" %}
                 </div>
             </div>
         </div>

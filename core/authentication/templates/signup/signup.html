@@ -1,0 +1,43 @@
+{% extends "layouts/base_auth.html" %}
+{% load static %}
+
+{% block title %}
+    Registro - Code Crafters
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'signup/css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5 bg-body-tertiary">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm rounded-4 p-4">
+                    <h3 class="text-center mb-4 fw-bold text-primary">Registro</h3>
+
+                    {% include "components/molecules/social_buttons.html" %}
+                    <hr class="mb-4">
+
+                    <form method="post" class="needs-validation">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        {% include "signup/components/form_group.html" with field=form.username label="Usuario" %}
+                        {% include "signup/components/form_group.html" with field=form.email label="Email" %}
+                        {% include "signup/components/form_group.html" with field=form.dni label="Cédula" %}
+                        {% include "signup/components/form_group.html" with field=form.first_name label="Nombres" %}
+                        {% include "signup/components/form_group.html" with field=form.last_name label="Apellidos" %}
+                        {% include "signup/components/form_group.html" with field=form.password1 label="Contraseña" %}
+                        {% include "signup/components/form_group.html" with field=form.password2 label="Confirmar Contraseña" %}
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary rounded-pill">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
