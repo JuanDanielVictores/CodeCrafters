@@ -1,0 +1,6 @@
+{% extends "layouts/base_dashboard.html" %}
+
+{% block content %}
+    <h1 class="mb-4">Bienvenido, {{ request.user.get_full_name|default:request.user.username }}</h1>
+    <p>Este es tu panel de control.</p>
+{% endblock %}
