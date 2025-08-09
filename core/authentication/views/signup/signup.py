@@ -13,3 +13,10 @@ class SignupView(FormView):
         user = form.save()
         # login(self.request, user)
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Registro - Code Crafters'
+        context['back_url'] = self.success_url
+        return context
+

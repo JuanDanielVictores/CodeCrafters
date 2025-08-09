@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block title %}
-    Registro - Code Crafters
+    {{ title }}
 {% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'signup/css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,14 +16,11 @@
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm rounded-4 p-4">
                     <h3 class="text-center mb-4 fw-bold text-primary">Registro</h3>
-
                     {% include "components/molecules/social_buttons.html" %}
                     <hr class="mb-4">
-
                     <form method="post" class="needs-validation">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
-
                         {% include "signup/components/form_group.html" with field=form.username label="Usuario" %}
                         {% include "signup/components/form_group.html" with field=form.email label="Email" %}
                         {% include "signup/components/form_group.html" with field=form.dni label="Cédula" %}
@@ -31,8 +29,16 @@
                         {% include "signup/components/form_group.html" with field=form.password1 label="Contraseña" %}
                         {% include "signup/components/form_group.html" with field=form.password2 label="Confirmar Contraseña" %}
 
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary rounded-pill">Registrarse</button>
+                        <div class="row g-2">
+                            <div class="col-12 col-md-6 d-grid">
+                                <button type="submit" class="btn btn-primary rounded-pill w-100">
+                                    Registrarse
+                                </button>
+                            </div>
+                            <div class="col-12 col-md-6 d-grid">
+                                <a href="{{ back_url }}"
+                                   class="btn btn-outline-secondary rounded-pill w-100">Regresar</a>
+                            </div>
                         </div>
                     </form>
                 </div>
