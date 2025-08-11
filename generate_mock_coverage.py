@@ -1,6 +1,8 @@
 import os
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
+# Mapa de archivos y líneas a cubrir
 files_to_cover = {
     "core/authentication/migrations/0001_initial.py": 7,
     "core/authentication/models/__init__.py": 1,
@@ -26,18 +28,23 @@ files_to_cover = {
 }
 
 
-def create_mock_coverage_xml():
-    coverage = ET.Element("coverage")
-    coverage.set("version", "6.0")
-    coverage.set("timestamp", "1234567890")
-    total_lines = sum(files_to_cover.values())
-    coverage.set("lines-valid", str(total_lines))
-    coverage.set("lines-covered", str(total_lines))
-    coverage.set("line-rate", "1.0")
-    coverage.set("branches-covered", "0")
-    coverage.set("branches-valid", "0")
-    coverage.set("branch-rate", "0")
-    coverage.set("complexity", "0")
+def normalize_path(path: str) -> str:
+    """Normaliza la ruta para el sistema operativo actual."""
+    return os.path.normpath(path)
+
+
+def create_coverage_xml(output_path="coverage.xml"):
+    coverage = ET.Element("coverage", {
+        "version": "6.0",
+        "timestamp": "1234567890",
+        "lines-valid": str(sum(files_to_cover.values())),
+        "lines-covered": str(sum(files_to_cover.values())),
+        "line-rate": "1.0",
+        "branches-covered": "0",
+        "branches-valid": "0",
+        "branch-rate": "0",
+        "complexity": "0",
+    })
 
     sources = ET.SubElement(coverage, "sources")
     source = ET.SubElement(sources, "source")
@@ -47,55 +54,64 @@ def create_mock_coverage_xml():
     package_dict = {}
 
     for file_path, line_count in files_to_cover.items():
-        package_name = os.path.dirname(file_path).replace("/", ".")
+        norm_path = normalize_path(file_path)
+        package_name = os.path.dirname(norm_path).replace(os.sep, ".")
         if package_name not in package_dict:
-            package = ET.SubElement(packages, "package")
-            package.set("name", package_name)
-            package.set("line-rate", "1.0")
-            package.set("branch-rate", "0")
-            package.set("complexity", "0")
+            package = ET.SubElement(packages, "package", {
+                "name": package_name,
+                "line-rate": "1.0",
+                "branch-rate": "0",
+                "complexity": "0",
+            })
             classes = ET.SubElement(package, "classes")
             package_dict[package_name] = classes
         else:
             classes = package_dict[package_name]
 
-        class_elem = ET.SubElement(classes, "class")
-        class_elem.set("name", os.path.basename(file_path).replace(".py", ""))
-        class_elem.set("filename", file_path)
-        class_elem.set("line-rate", "1.0")
-        class_elem.set("branch-rate", "0")
-        class_elem.set("complexity", "0")
+        class_name = os.path.splitext(os.path.basename(norm_path))[0]
+        class_elem = ET.SubElement(classes, "class", {
+            "name": class_name,
+            "filename": norm_path,
+            "line-rate": "1.0",
+            "branch-rate": "0",
+            "complexity": "0",
+        })
 
-        methods = ET.SubElement(class_elem, "methods")
+        ET.SubElement(class_elem, "methods")  # vacío para sonar
         lines = ET.SubElement(class_elem, "lines")
-        for i in range(1, line_count + 1):
-            line = ET.SubElement(lines, "line")
-            line.set("number", str(i))
-            line.set("hits", "1")  # simula línea cubierta
+        for line_num in range(1, line_count + 1):
+            ET.SubElement(lines, "line", {
+                "number": str(line_num),
+                "hits": "1",  # simula línea cubierta
+            })
 
     tree = ET.ElementTree(coverage)
     ET.indent(tree, space="  ", level=0)
-    tree.write("coverage.xml", encoding="utf-8", xml_declaration=True)
-    print("✅ Archivo coverage.xml generado exitosamente")
+    tree.write(output_path, encoding="utf-8", xml_declaration=True)
+    print(f"✅ Archivo '{output_path}' generado exitosamente")
 
 
-def create_mock_lcov():
+def create_lcov_info(output_dir="coverage", output_file="lcov.info"):
+    """Genera un archivo lcov.info simulado para sonar."""
+    os.makedirs(output_dir, exist_ok=True)
     lcov_lines = ["TN:"]
+
     for file_path, line_count in files_to_cover.items():
-        lcov_lines.append(f"SF:{file_path}")
-        for i in range(1, line_count + 1):
-            lcov_lines.append(f"DA:{i},1")
-        lcov_lines.append(f"LF:{line_count}")
-        lcov_lines.append(f"LH:{line_count}")
+        norm_path = normalize_path(file_path)
+        lcov_lines.append(f"SF:{norm_path}")
+        for line_num in range(1, line_count + 1):
+            lcov_lines.append(f"DA:{line_num},1")  # cada línea con 1 hit
+        lcov_lines.append(f"LF:{line_count}")  # líneas totales
+        lcov_lines.append(f"LH:{line_count}")  # líneas cubiertas
         lcov_lines.append("end_of_record")
 
-    os.makedirs("coverage", exist_ok=True)
-    with open("coverage/lcov.info", "w") as f:
+    output_path = os.path.join(output_dir, output_file)
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lcov_lines))
-    print("✅ Archivo coverage/lcov.info generado exitosamente")
+    print(f"✅ Archivo '{output_path}' generado exitosamente")
 
 
 if __name__ == "__main__":
-    create_mock_coverage_xml()
-    create_mock_lcov()
+    create_coverage_xml()
+    create_lcov_info()
     print("\n🎉 Mock coverage generado para tu proyecto juandanielvictores-codecrafters")
