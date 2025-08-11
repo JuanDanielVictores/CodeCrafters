@@ -24,5 +24,27 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+
+{% block extra_js %}
+    <script type="application/javascript">
+        let errors = "";
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    errors += "{{ error }}\n";
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                errors += "{{ error }}\n";
+            {% endfor %}
+            Swal.fire({
+                icon: 'error',
+                title: 'Notificación',
+                text: errors,
+            });
+        {% endif %}
+    </script>
 
 {% endblock %}
