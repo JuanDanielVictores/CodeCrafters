@@ -1,14 +1,30 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 
-from core.authentication.forms import LoginForm
-
 
 class LoginAuthView(LoginView):
-    form_class = LoginForm
+    form_class = AuthenticationForm
     template_name = 'login/login.html'
-    redirect_authenticated_user = True
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for field in form.visible_fields():
+            field.field.widget.attrs.update({
+                'class': 'form-control',
+                'autocomplete': 'off',
+                'placeholder': f'Ingrese su {field.label.lower()}'
+            })
+        return form
+
+    def form_invalid(self, form):
+        for field in form.visible_fields():
+            field.field.widget.attrs.update({
+                'class': 'form-control is-invalid',
+                'autocomplete': 'off',
+                'placeholder': f'Ingrese su {field.label.lower()}'
+            })
+        return super().form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
